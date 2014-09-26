@@ -32,8 +32,3 @@ return array(
 * Copy migrations files from the module to your project and.
 * Apply migrations.
 * Use gii to generate 'Translations' model
-
-This interface allows:
-
-
-Remember to invalidate the email if it changes in the save() method from the Editable interface.
