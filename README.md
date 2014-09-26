@@ -15,7 +15,7 @@ return array(
     ......
     'modules'=>array(
         'translations' => array(
-            'class' => 'common.lib.translations.TranslationsModule',
+            'class' => 'common.lib.yii-translations.TranslationsModule',
         ),
     ),
 )
