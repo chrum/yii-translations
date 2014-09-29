@@ -1,5 +1,6 @@
 <?php
-
+$path = Yii::app()->getModule("translations")->getBasePath();
+require_once ($path."/helpers/langHelper.php");
 class m140717_083459_alteringTranslationsTable extends CDbMigration
 {
     public function up()
@@ -19,6 +20,6 @@ class m140717_083459_alteringTranslationsTable extends CDbMigration
         }
 
         $this->addColumn("{{translations}}", "text", "varchar(100) NOT NULL");
-        return false;
+        return true;
     }
 }

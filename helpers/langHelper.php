@@ -8,14 +8,14 @@
 
 class langHelper {
     public static function getLangs() {
-        return Yii::app()->params['langs'];
+        return Yii::app()->getModule('translations')->langs;
     }
     public static function getCurrentLang() {
         if (isset($_SESSION['lang'])) {
             return $_SESSION['lang'];
 
         } else {
-            return Yii::app()->params['defaultLang'];
+            return Yii::app()->getModule('translations')->defaultLang;
         }
     }
 

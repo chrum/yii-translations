@@ -9,6 +9,15 @@
 class TranslationsModule extends CWebModule
 {
     public $defaultController='manage';
+
+    public $defaultLang = "en";
+    /**
+     * @var array Array with available languages
+     */
+    public $langs = array(
+        "en" => "English"
+    );
+
     public function init()
     {
         // this method is called when the module is being created
@@ -18,6 +27,7 @@ class TranslationsModule extends CWebModule
         $this->setImport(array(
             'translations.controllers.*',
             'translations.views.*',
+            'translations.helpers.*'
         ));
 
     }

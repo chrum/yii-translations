@@ -1,8 +1,8 @@
 <?php
-
+$path = Yii::app()->getModule("translations")->getBasePath();
+require_once ($path."/helpers/langHelper.php");
 class m140716_074829_addingTranslators extends CDbMigration
 {
-
     public function up()
     {
         $langs = langHelper::getLangs();

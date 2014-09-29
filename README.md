@@ -16,28 +16,18 @@ return array(
     'modules'=>array(
         'translations' => array(
             'class' => 'common.lib.yii-translations.TranslationsModule',
+                    "defaultLang" => "dk",
+                    "langs" => array(
+                        "dk" => "Danish",
+                        "se" => "Swedish",
+                        "no" => "Norwegian",
+                        "fi" => "Finnish"
+                    )
         ),
     ),
 )
 ~~~
 
-Adding some languages in your config/main.php, params section
-~~~php
-return array(
-    .......
-    'params' => array(
-        "defaultLang" => "dk",
-        "langs" => array(
-            "dk" => "Danish",
-            "se" => "Swedish",
-            "no" => "Norwegian",
-            "fi" => "Finnish"
-        )
-    ),
-)
-~~~
-
-* Copy helper class(es) and make sure they are imported
-* Copy migrations files from the module to your project and.
+* Copy migrations files from the module to your project
 * Apply migrations.
 * Use gii to generate 'Translations' model
