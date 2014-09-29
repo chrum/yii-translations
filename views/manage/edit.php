@@ -15,7 +15,7 @@ $langs = langHelper::getLangs();
         Create New String
     <?php else : ?>
         Updating String: <?php echo $model->id; ?>
-        <?php echo CHtml::link('Delete', array('translations/delete', 'id' => $model->id), array('class'=>'btn btn-danger btn-xs delete')); ?>
+        <?php echo CHtml::link('Delete', array('manage/delete', 'id' => $model->id), array('class'=>'btn btn-danger btn-xs delete')); ?>
     <?php endif; ?>
 </h1>
 
