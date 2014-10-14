@@ -16,7 +16,7 @@ class ManageController extends EController
 
     public function run($actionID)
     {
-        return parent::run(($id=parent::getId()) !== 'default' ? $id : $actionID);
+        return parent::run(($id=parent::getId()) !== 'manage' ? $id : $actionID);
     }
 
     public function actions()
