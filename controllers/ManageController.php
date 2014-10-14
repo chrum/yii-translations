@@ -2,17 +2,32 @@
 
 class ManageController extends EController
 {
-    public function accessRules()
+    public function getId()
     {
-        $roles = array('admin', 'manager');
+        // use constant id to allow mapping fake controller names to this one, @see TranslationsModule::$controllerMap
+        return 'manage';
+    }
+
+    public function getUniqueId()
+    {
+        // use constant id to allow mapping fake controller names to this one, @see TranslationsModule::$controllerMap
+        return $this->getModule() ? $this->getModule()->getId().'/manage' : 'manage';
+    }
+
+    public function run($actionID)
+    {
+        return parent::run(($id=parent::getId()) !== 'default' ? $id : $actionID);
+    }
+
+    public function actions()
+    {
+        $actions = array();
         $langs = langHelper::getLangs();
         foreach($langs as $code => $name) {
-            $roles[] = "translator-".$code;
+            $actions[$code] = 'translations.actions.getTranslationsAction';
         }
-        return array(
-            array('allow', 'roles'=>$roles),
-            array('deny'),
-        );
+
+        return $actions;
     }
 
     public function actionIndex() {
@@ -77,5 +92,4 @@ class ManageController extends EController
             'model'     => $model,
         ));
     }
-
 }

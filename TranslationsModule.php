@@ -18,6 +18,10 @@ class TranslationsModule extends CWebModule
         "en" => "English"
     );
 
+    public $controllerMap = array(
+        'index' => 'translations.controllers.ManageController',
+    );
+
     public function init()
     {
         // this method is called when the module is being created
@@ -30,6 +34,9 @@ class TranslationsModule extends CWebModule
             'translations.helpers.*'
         ));
 
+        foreach($this->langs as $code => $name) {
+            $this->controllerMap[$code] = 'translations.controllers.ManageController';
+        }
     }
 
     public function beforeControllerAction($controller, $action)
