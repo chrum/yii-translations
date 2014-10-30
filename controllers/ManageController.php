@@ -31,10 +31,25 @@ class ManageController extends EController
     }
 
     public function actionIndex() {
-        $models = Translations::model()->findAll(array('order'=>'string_id'));
+        if (isset($_REQUEST['setNamespace'])) {
+            Namespaces::setCurrent($_REQUEST['setNamespace']);
+        }
+
+        $q = new CDbCriteria();
+        $q->order = "string_id ASC";
+
+        $currentNamespace = Namespaces::getCurrent();
+        if ($currentNamespace != null) {
+            $q->addCondition("string_id like '$currentNamespace%' ");
+        };
+
+        $models = Translations::model()->findAll($q);
+        $namespaces = Namespaces::model()->findAll();
 
 		$this->render('index', array(
-            'models' => $models
+            'models' => $models,
+            'namespaces' => $namespaces,
+            'currentNamespace' => $currentNamespace
         ));
 	}
 
@@ -46,6 +61,10 @@ class ManageController extends EController
             $translation->attributes = $_REQUEST['Translations'];
 
             if ($translation->validate()) {
+                if (isset($_REQUEST['namespace']) && Namespaces::model()->isValidNamespace($_REQUEST['namespace'])) {
+                    $translation->string_id = $_REQUEST['namespace'].$translation->string_id;
+                }
+
                 if ($translation->save(false)) {
                     $this->redirect(array('index'));
                 }
@@ -56,8 +75,13 @@ class ManageController extends EController
             $this->redirect(array('update','id'=>$translation->id));
         }
 
+        $currentNamespace = Namespaces::getCurrent();
+        $namespaces = Namespaces::model()->findAll();
+
         $this->render('edit', array(
             'model'     => $translation,
+            'namespaces' => $namespaces,
+            'currentNamespace' => $currentNamespace
         ));
     }
 
@@ -88,7 +112,7 @@ class ManageController extends EController
             }
         }
 
-        $this->render('edit',array(
+        $this->render('edit', array(
             'model'     => $model,
         ));
     }

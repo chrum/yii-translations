@@ -24,6 +24,35 @@ $langs = langHelper::getLangs();
 </script>
 <h1>Manage translation strings</h1>
 
+<label>Namespace</label>
+<div class="dropdown btn-group">
+    <button class="btn dropdown-toggle" type="button" id="categoryMenu" data-toggle="dropdown">
+            <span class="title">
+                <?php if($currentNamespace == null):?>
+                    Show all
+                <?php else: ?>
+                    <?php echo $currentNamespace ?>
+                <?php endif;?>
+            </span>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="categoryMenu">
+        <li role="presentation" class="<?php echo $currentNamespace == null ? "disabled" : "" ?>">
+            <a role="menuitem" tabindex="-1" href="?setNamespace=all">Show all</a>
+        </li>
+        <?php foreach($namespaces as $namespace):?>
+            <li role="presentation" class="<?php echo $namespace->name == $currentNamespace ? "disabled" : "" ?>">
+                <a role="menuitem" tabindex="-1" href="?setNamespace=<?php echo $namespace->name?>">
+                    <?php echo $namespace->name?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+        <li class="divider"></li>
+        <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="/translations/namespace">Edit namespaces</a>
+        </li>
+    </ul>
+</div>
 <div>
     <table class="table table-striped table-hover">
         <thead>

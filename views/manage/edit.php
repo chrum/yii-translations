@@ -35,6 +35,19 @@ $langs = langHelper::getLangs();
     <?php endif;?>
 
     <div class="row">
+        <?php if ($model->id == null):?>
+            <div class="col-md-6">
+                <label for="namespace" class="required">Namespace</label>
+                <select id="namespace" name="namespace" class="form-control">
+                    <option value="">No namespace</option>
+                    <?php foreach($namespaces as $ns): ?>
+                        <option <?php echo $ns->name == $currentNamespace ? 'selected' : '' ?>>
+                            <?php echo $ns->name?>
+                        </option>
+                    <?php endforeach;?>
+                </select>
+            </div>
+        <?php endif;?>
         <div class="control-group form-group col-md-6">
             <?php echo $form->labelEx($model,'string_id'); ?>
             <?php echo $form->textField($model,'string_id', array("class" => "form-control")); ?>

@@ -29,6 +29,7 @@ class TranslationsModule extends CWebModule
 
         // import the module-level models and components
         $this->setImport(array(
+            'translations.models.*',
             'translations.controllers.*',
             'translations.views.*',
             'translations.helpers.*'
