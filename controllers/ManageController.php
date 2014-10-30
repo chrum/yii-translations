@@ -116,4 +116,33 @@ class ManageController extends EController
             'model'     => $model,
         ));
     }
+
+    public function actionBulkAdd() {
+        $added = 0;
+        if (isset($_REQUEST['strings'])) {
+            foreach($_REQUEST['strings'] as $string) {
+                if ($string != "") {
+                    $translation = new Translations();
+                    $translation->string_id = $string;
+
+                    if ($translation->validate()) {
+                        if (isset($_REQUEST['namespace']) && Namespaces::model()->isValidNamespace($_REQUEST['namespace'])) {
+                            $translation->string_id = $_REQUEST['namespace'].$translation->string_id;
+                        }
+                        $translation->save(false);
+                        $added++;
+                    }
+                }
+
+            }
+        }
+
+        $currentNamespace = Namespaces::getCurrent();
+        $namespaces = Namespaces::model()->findAll();
+        $this->render('bulk_add', array(
+            'namespaces' => $namespaces,
+            'currentNamespace' => $currentNamespace,
+            'added' => $added
+        ));
+    }
 }
