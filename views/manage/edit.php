@@ -58,7 +58,7 @@ $langs = langHelper::getLangs();
     <?php foreach($langs as $key => $name): ?>
         <div class="row form-group">
             <?php echo CHtml::label($name, $key); ?>
-            <?php echo CHtml::textField('Translations['.$key.']', isset($model->{$key}) ? $model->{$key} : "", array(
+            <?php echo CHtml::textArea('Translations['.$key.']', isset($model->{$key}) ? $model->{$key} : "", array(
                 "placeholder" => "Translated to ".$name,
                 "class" => "form-control"
             )); ?>
