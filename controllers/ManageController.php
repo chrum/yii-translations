@@ -17,8 +17,10 @@ class ManageController extends EController
      */
     public function accessRules()
     {
-        $rolesAllowed = Yii::app()->getModule("translations")->addTranslatorRoles(array('admin'));
+        $rolesAllowed = $this->getModule()->addTranslatorRoles(array('admin'));
+        $langActions = array_keys($this->getModule()->langs);
         return array(
+            array('allow', 'actions' => array("en"), 'users' => array("*")),
             array('allow', 'roles'=>$rolesAllowed),
             array('deny', 'users'=>array('*')),
         );

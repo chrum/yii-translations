@@ -17,7 +17,7 @@ class NamespaceController extends EController
      */
     public function accessRules()
     {
-        $rolesAllowed = Yii::app()->getModule("translations")->addTranslatorRoles(array('admin'));
+        $rolesAllowed = $this->getModule()->addTranslatorRoles(array('admin'));
         return array(
             array('allow', 'roles'=>$rolesAllowed),
             array('deny', 'users'=>array('*')),
