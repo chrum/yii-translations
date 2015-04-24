@@ -2,6 +2,28 @@
 
 class ManageController extends EController
 {
+
+    public function filters()
+    {
+        return array(
+            'accessControl',
+        );
+    }
+
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+    public function accessRules()
+    {
+        $rolesAllowed = Yii::app()->getModule("translations")->addTranslatorRoles(array('admin'));
+        return array(
+            array('allow', 'roles'=>$rolesAllowed),
+            array('deny', 'users'=>array('*')),
+        );
+    }
+
     public function getId()
     {
         // use constant id to allow mapping fake controller names to this one, @see TranslationsModule::$controllerMap

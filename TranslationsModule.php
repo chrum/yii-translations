@@ -51,4 +51,12 @@ class TranslationsModule extends CWebModule
         else
             return false;
     }
+
+    public function addTranslatorRoles($roles = array()) {
+        foreach($this->langs as $code => $name) {
+            $roles[] = 'translator-'.$code;
+        }
+
+        return $roles;
+    }
 } 
